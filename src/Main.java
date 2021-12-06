@@ -1,52 +1,87 @@
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(numberToWords(15));
+        System.out.println(getDigitCount(100));
+        System.out.println(reverse(100));
+        numbersToWords(100);
     }
 
-    public static String numberToWords(int number) {
+    public static void numbersToWords(int number) {
         if (number < 0) {
-            System.out.println("Invalid value");
+            System.out.println("Invalid Value");
         }
-        String word = null;
-        while (number > 0) {
-            int divider = number % 10; // uzima zadnju cifru
-            switch (divider) {
+
+        int reverseNumber = reverse(number);
+        int numberDigitsOfReverse = getDigitCount(reverseNumber);
+        int numberDigitsOfNumber = getDigitCount(number);
+
+        while (numberDigitsOfNumber > numberDigitsOfReverse) {
+            System.out.print("Zero ");
+            numberDigitsOfNumber -= 1;
+        }
+
+        while (reverseNumber > 0) {
+            switch (reverseNumber % 10) {
+                case 0:
+                    System.out.print("Zero ");
+                    break;
                 case 1:
-                    word = "One";
+                    System.out.print("One ");
                     break;
                 case 2:
-                    word = "Two";
+                    System.out.print("Two ");
                     break;
                 case 3:
-                    word = "Three";
+                    System.out.print("Three ");
                     break;
                 case 4:
-                    word = "Four";
+                    System.out.print("Four ");
                     break;
                 case 5:
-                    word = "Five";
+                    System.out.print("Five ");
                     break;
                 case 6:
-                    word = "Six";
+                    System.out.print("Six ");
                     break;
                 case 7:
-                    word = "Seven";
+                    System.out.print("Seven ");
                     break;
                 case 8:
-                    word = "Eight";
+                    System.out.print("Eight ");
                     break;
                 case 9:
-                    word = "Nine";
+                    System.out.print("Nine ");
                     break;
-                case 0:
-                    word = "Zero";
-                    continue;
-                number = number / 10 ;
-            }return word;
+                default:
+                    break;
+            }
+            reverseNumber /= 10;
+        }
 
-
-
-        } return " + ";
     }
-}
+
+    public static int reverse(int number) {
+
+        int reverseNumber = 0;
+
+        while (number != 0) {
+            reverseNumber = (reverseNumber * 10) + (number % 10);
+            number /= 10;
+        }
+        return reverseNumber;
+    }
+
+    public static int getDigitCount(int number) {
+
+        if (number < 0) {
+            return -1;
+        }
+
+        int counter = 1;
+        while (number > 9) {
+            number /= 10;
+            counter++;
+        }
+        return counter;
+    }
+} 
